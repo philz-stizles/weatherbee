@@ -1,0 +1,4 @@
+.grid {
+  display: grid;
+  grid-column-template: 4fr;
+}
