@@ -1,8 +1,9 @@
 .favorite-card {
   position: relative;
-  box-shadow: 3px 3px 10px 3px #dddddd;
+  background-color: #f8f9fa;
+  /* box-shadow: 2px 2px 5px 1px #dee2e6; */
   border-radius: 20px;
-  border: 1px solid #ddd;
+  border: 1px solid #adb5bd;
   padding: 1rem 1.4rem;
   cursor: pointer;
 }

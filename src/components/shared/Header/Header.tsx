@@ -1,5 +1,4 @@
-import { IoHeartOutline } from 'react-icons/io5';
-import { IconButton, Logo } from '../../ui';
+import { Logo } from '../../ui';
 import Container from '../Container/Container';
 import classes from './Header.module.css';
 

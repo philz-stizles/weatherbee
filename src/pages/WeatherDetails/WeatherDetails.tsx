@@ -57,7 +57,7 @@ const WeatherDetails = () => {
             <div className={classes.timestamp}>
               <small>{moment.unix(dt).format('Do-MMM YYYY')}</small>
               <p>{moment.unix(dt).format('dddd h:mm A')}</p>
-              <small>{name === 'yes' ? 'Day' : 'Night'}</small>
+              <small>{weather[0].icon.includes('d') ? 'Day' : 'Night'}</small>
             </div>
             <h2 className={classes.name}>
               {name}, {sys.country}
@@ -86,11 +86,11 @@ const WeatherDetails = () => {
               </div>
 
               <div className={classes['info-card']}>
-                <h3>Pressure</h3>
+                <h4>Pressure</h4>
                 <p className={classes.value}>{main.pressure} mb</p>
               </div>
               <div className={classes['info-card']}>
-                <h3>Cloud Cover</h3>
+                <h4>Cloud Cover</h4>
                 <p className={classes.value}>{main.temp_max}</p>
               </div>
             </div>
