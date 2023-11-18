@@ -1,9 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800;900;1000&family=Raleway:wght@100;200;300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Urbanist:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
 *,
-*:before,
-*:after {
-  padding: 0;
+*::after,
+*::before {
+  box-sizing: inherit;
   margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%;
   box-sizing: border-box;
+  scroll-behavior: smooth;
+
+  @media only screen and (max-width: $bp-large) {
+    font-size: 50%;
+  }
 }
 
 body,
@@ -14,8 +26,38 @@ body,
 }
 
 body {
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.4rem;
+  line-height: 1.6;
+  background-color: #f1f3f5;
 }
 
 main {
   flex: 1;
+}
+
+a,
+a:link,
+a:visited {
+  text-decoration: none;
+  color: inherit;
+}
+
+button,
+input {
+  border: none;
+  background: none;
+}
+
+button {
+  font-size: inherit;
+}
+
+input {
+  outline: none;
+}
+
+ul,
+ol {
+  list-style: none;
 }

@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
-import { weatherAccessKey, weatherBaseUrl } from '../constants';
+import { weatherAccessKey, weatherBaseUrl } from '../../constants';
 
-const useQuery = <T>(endpoint: string | null, initialValue: T) => {
+export const useQuery = <T>(endpoint: string | null, initialValue: T) => {
   const [data, setData] = useState<T>(initialValue);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<null | any>(null);
@@ -11,7 +11,9 @@ const useQuery = <T>(endpoint: string | null, initialValue: T) => {
       setIsLoading((prevState) => (prevState ? prevState : true));
 
       const response = await fetch(
-        `${weatherBaseUrl}?access_key=${weatherAccessKey}`
+        `${weatherBaseUrl}?access_key=${weatherAccessKey}${
+          endpoint ? endpoint : ''
+        }`
       );
       if (!response.ok) {
         throw new Error('Could not fetch data');
@@ -22,10 +24,7 @@ const useQuery = <T>(endpoint: string | null, initialValue: T) => {
         throw new Error(data.error?.info ?? 'Could not fetch data');
       }
 
-      console.log(data);
-      if (data) {
-        setData(data as T);
-      }
+      setData(data as T);
     } catch (error) {
       console.error(error);
       setError(error);
@@ -40,5 +39,3 @@ const useQuery = <T>(endpoint: string | null, initialValue: T) => {
 
   return { data, isLoading, error, reload: sendQuery };
 };
-
-export default useQuery;

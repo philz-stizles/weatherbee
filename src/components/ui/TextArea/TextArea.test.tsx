@@ -1,2 +1,2 @@
 import { render } from '@testing-library/react';
-import Home from './Home';
+import TextArea from './TextArea';

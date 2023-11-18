@@ -1,7 +1,16 @@
-type Props = {};
+import { IoHeartOutline } from 'react-icons/io5';
+import { IconButton, Logo } from '../../ui';
+import Container from '../Container/Container';
+import classes from './Header.module.css';
 
-const Header = (props: Props) => {
-  return <div>Header</div>;
+const Header = () => {
+  return (
+    <header className={classes.header}>
+      <Container className={classes.container}>
+        <Logo />
+      </Container>
+    </header>
+  );
 };
 
 export default Header;

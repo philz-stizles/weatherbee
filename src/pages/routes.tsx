@@ -9,7 +9,7 @@ const routes = createBrowserRouter([
     element: <RootLayout />,
     children: [
       { index: true, element: <HomePage /> },
-      { path: '/weather:id', element: <WeatherDetails /> },
+      { path: '/weather/:id', element: <WeatherDetails /> },
     ],
   },
 ]);

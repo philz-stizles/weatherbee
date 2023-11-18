@@ -1,0 +1,54 @@
+.weather-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  padding: 1.6rem;
+  cursor: pointer;
+  background-color: #f8f9fa;
+  box-shadow: 0px 0px 25px 1px rgba(50, 50, 50, 0.1);
+  animation: appear 500ms ease-out forwards;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.temperature {
+  font-weight: bold;
+  font-size: 1.8rem;
+}
+
+.icon {
+  color: #ffd43b;
+}
+
+.close-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.favorite {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  color: #fa5252;
+}
+
+@keyframes appear {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  75% {
+    transform: scale(0.95);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
