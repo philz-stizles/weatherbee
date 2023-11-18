@@ -9,7 +9,7 @@ const TextArea = ({ label, ...props }: Props) => {
   return (
     <div className={classes.textarea}>
       {label && <label>{label}</label>}
-      <textarea {...props} />
+      <textarea rows={4} {...props} />
     </div>
   );
 };
