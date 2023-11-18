@@ -2,6 +2,7 @@ import { WeatherResponse } from '../../../types';
 import IconButton from '../IconButton/IconButton';
 import {
   IoCloseOutline,
+  IoCloudyNight,
   IoHeart,
   IoHeartOutline,
   IoSunny,
@@ -19,7 +20,7 @@ type Props = {
 
 const WeatherCard = ({ city, onRemove }: Props) => {
   const { data, error } = useQuery<WeatherResponse | null>(
-    `&query=${city}`, // '/',
+    `&query=${city}`,
     null
   );
   const navigate = useNavigate();
@@ -89,14 +90,17 @@ const WeatherCard = ({ city, onRemove }: Props) => {
           } else {
             handleAddToFavorite(data);
           }
-          
         }}
       />
 
       {data && (
         <div className={classes.content}>
           <h4>{`${data?.location?.name?.substring(0, 18)}`}</h4>
-          <IoSunny className={classes.icon} size={32} />
+          {data?.current.is_day ? (
+            <IoSunny className={classes.icon} size={32} />
+          ) : (
+            <IoCloudyNight className={classes.icon} size={32} />
+          )}
           <p className={classes.temperature}>{data?.current?.temperature}°C</p>
         </div>
       )}
