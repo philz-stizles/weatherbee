@@ -1,4 +1,4 @@
-import { WeatherResponse } from '../../../types';
+import { OpenWeather} from '../../../types';
 import IconButton from '../IconButton/IconButton';
 import {
   IoCloseOutline,
@@ -19,18 +19,15 @@ type Props = {
 };
 
 const WeatherCard = ({ city, onRemove }: Props) => {
-  const { data, error } = useQuery<WeatherResponse | null>(
-    `&query=${city}`,
-    null
-  );
+  const { data, error } = useQuery<OpenWeather | null>(`?q=${city}`, null);
   const navigate = useNavigate();
   const { add, remove, favorites } = useFavorites();
 
   const isFavorite = useMemo(() => {
     return favorites.some(
-      (weather) => weather.location.name === data?.location.name
+      (weather) => weather.name === data?.name
     );
-  }, [data?.location.name, favorites]);
+  }, [data?.name, favorites]);
 
   const handleRemove = useCallback(
     (e: MouseEvent<HTMLButtonElement>) => {
@@ -42,9 +39,9 @@ const WeatherCard = ({ city, onRemove }: Props) => {
   );
 
   const handleNavigation = useCallback(
-    (weather?: WeatherResponse) => {
+    (weather?: OpenWeather) => {
       weather &&
-        navigate(`/weather/${weather.location?.name}`, {
+        navigate(`/weather/${weather.name}`, {
           state: weather,
         });
     },
@@ -52,14 +49,14 @@ const WeatherCard = ({ city, onRemove }: Props) => {
   );
 
   const handleAddToFavorite = useCallback(
-    (weather: WeatherResponse) => {
+    (weather: OpenWeather) => {
       add(weather);
     },
     [add]
   );
 
   const handleRemoveFromFavorite = useCallback(
-    (weather: WeatherResponse) => {
+    (weather: OpenWeather) => {
       remove(weather);
     },
     [remove]
@@ -95,14 +92,23 @@ const WeatherCard = ({ city, onRemove }: Props) => {
 
       {data && (
         <div className={classes.content}>
-          <h4>{`${data?.location?.name?.substring(0, 18)}`}</h4>
-          {data?.current.is_day ? (
+          <h4>{`${data.name?.substring(0, 18)}`}</h4>
+          {data?.base ? (
             <IoSunny className={classes.icon} size={32} />
           ) : (
             <IoCloudyNight className={classes.icon} size={32} />
           )}
-          <p className={classes.temperature}>{data?.current?.temperature}°C</p>
+          <p className={classes.temperature}>{data?.main.temp}°C</p>
         </div>
+        // <div className={classes.content}>
+        //   <h4>{`${data?.location?.name?.substring(0, 18)}`}</h4>
+        //   {data?.current.is_day ? (
+        //     <IoSunny className={classes.icon} size={32} />
+        //   ) : (
+        //     <IoCloudyNight className={classes.icon} size={32} />
+        //   )}
+        //   <p className={classes.temperature}>{data?.current?.temperature}°C</p>
+        // </div>
       )}
     </div>
   );

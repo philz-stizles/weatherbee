@@ -6,7 +6,7 @@ import {
   useEffect,
   useReducer,
 } from 'react';
-import { WeatherResponse } from '../types';
+import { OpenWeather } from '../types';
 
 const REMOVE_FROM_FAVORITES = 'REMOVE_FROM_FAVORITES';
 const ADD_TO_FAVORITES = 'ADD_TO_FAVORITES';
@@ -14,26 +14,26 @@ const INIT_FAVORITES = 'INIT_FAVORITES';
 export const FAVORITES_STORE = 'FAVORITES_STORE';
 
 type ContextType = {
-  favorites: WeatherResponse[];
-  add: (weather: WeatherResponse) => void;
-  remove: (weather: WeatherResponse) => void;
+  favorites: OpenWeather[];
+  add: (weather: OpenWeather) => void;
+  remove: (weather: OpenWeather) => void;
 };
 
 const FavoritesContext = createContext<ContextType>({
   favorites: [],
-  add: (weather: WeatherResponse) => {},
-  remove: (weather: WeatherResponse) => {},
+  add: (weather: OpenWeather) => {},
+  remove: (weather: OpenWeather) => {},
 });
 
 type StateType = {
-  favorites: WeatherResponse[];
+  favorites: OpenWeather[];
   isLoading: boolean;
 };
 
 type ActionType =
-  | { type: 'REMOVE_FROM_FAVORITES'; payload: WeatherResponse }
-  | { type: 'ADD_TO_FAVORITES'; payload: WeatherResponse }
-  | { type: 'INIT_FAVORITES'; payload: WeatherResponse[] };
+  | { type: 'REMOVE_FROM_FAVORITES'; payload: OpenWeather }
+  | { type: 'ADD_TO_FAVORITES'; payload: OpenWeather }
+  | { type: 'INIT_FAVORITES'; payload: OpenWeather[] };
 
 const reducer = (state: StateType, action: ActionType) => {
   const { type, payload } = action;
@@ -48,7 +48,7 @@ const reducer = (state: StateType, action: ActionType) => {
       {return {
         ...state,
         favorites: state.favorites.filter(
-          (favorite) => favorite.location.name !== payload.location.name
+          (favorite) => favorite.name !== payload.name
         ),
       };}
     default:
@@ -81,11 +81,11 @@ export const FavoritesProvider = ({ children }: PropsWithChildren) => {
     localStorage.setItem(FAVORITES_STORE, JSON.stringify(favorites));
   }, [favorites]);
 
-  const handleAddToFavorites = useCallback((weather: WeatherResponse) => {
+  const handleAddToFavorites = useCallback((weather: OpenWeather) => {
     dispatch({ type: ADD_TO_FAVORITES, payload: weather });
   }, []);
 
-  const handleRemoveFromFavorites = useCallback((weather: WeatherResponse) => {
+  const handleRemoveFromFavorites = useCallback((weather: OpenWeather) => {
     dispatch({ type: REMOVE_FROM_FAVORITES, payload: weather });
   }, []);
 

@@ -50,7 +50,7 @@ const WeatherDetails = () => {
               <IoCloudyNight size={48} />
             )}
             <div className={classes.temperature}>
-              <h2>{current.temperature} C</h2>
+              <h2>{current.temperature}°C</h2>
               <small>{current.weather_descriptions[0]}</small>
             </div>
             <div className={classes.divider}></div>
@@ -74,7 +74,7 @@ const WeatherDetails = () => {
               </div>
               <div className={classes['info-card']}>
                 <h4>Real feel</h4>
-                <p className={classes.value}>{current.feelslike}C</p>
+                <p className={classes.value}>{current.feelslike}°C</p>
               </div>
               <div className={classes['info-card']}>
                 <h4>UV Index</h4>

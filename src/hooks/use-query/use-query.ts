@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { weatherAccessKey, weatherBaseUrl } from '../../constants';
+import { accessKey, baseUrl } from '../../constants';
 
 export const useQuery = <T>(endpoint: string | null, initialValue: T) => {
   const [data, setData] = useState<T>(initialValue);
@@ -19,10 +19,7 @@ export const useQuery = <T>(endpoint: string | null, initialValue: T) => {
         setIsLoading((prevState) => (prevState ? prevState : true));
 
         const response = await fetch(
-          `${weatherBaseUrl}?access_key=${weatherAccessKey}${
-            endpoint ? endpoint : ''
-          }`,
-          // { mode: 'no-cors' }
+          `${baseUrl}${endpoint ? endpoint : ''}${accessKey}`
         );
         if (!response.ok) {
           throw new Error('Could not fetch data');

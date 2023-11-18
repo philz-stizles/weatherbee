@@ -1,4 +1,4 @@
-import { WeatherResponse } from '../../../types';
+import { OpenWeather } from '../../../types';
 import IconButton from '../IconButton/IconButton';
 import { IoCloseOutline } from 'react-icons/io5';
 import classes from './FavoriteCard.module.css';
@@ -6,15 +6,15 @@ import { MouseEvent, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 type Props = {
-  data: WeatherResponse;
-  onRemove?: (data: WeatherResponse) => void;
+  data: OpenWeather;
+  onRemove?: (data: OpenWeather) => void;
 };
 
 const FavoriteCard = ({ data, onRemove }: Props) => {
   const navigate = useNavigate();
 
   const handleRemove = useCallback(
-    (e: MouseEvent<HTMLButtonElement>, data: WeatherResponse) => {
+    (e: MouseEvent<HTMLButtonElement>, data: OpenWeather) => {
       e.stopPropagation();
 
       onRemove && onRemove(data);
@@ -23,9 +23,9 @@ const FavoriteCard = ({ data, onRemove }: Props) => {
   );
 
   const handleNavigation = useCallback(
-    (weather?: WeatherResponse) => {
+    (weather?: OpenWeather) => {
       weather &&
-        navigate(`/weather/${weather.request?.query}`, {
+        navigate(`/weather/${weather.name}`, {
           state: weather,
         });
     },
@@ -45,8 +45,8 @@ const FavoriteCard = ({ data, onRemove }: Props) => {
 
       {data && (
         <div className={classes.content}>
-          <h4>{`${data?.location?.name?.substring(0, 18)}`}</h4>
-          <p>{data.current?.temperature}°C</p>
+          <h4>{`${data?.name?.substring(0, 18)}`}</h4>
+          <p>{data.main.temp}°C</p>
         </div>
       )}
     </div>

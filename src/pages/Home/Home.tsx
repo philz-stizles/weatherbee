@@ -5,10 +5,10 @@ import Weather from '../../components/home/Weather/Weather';
 import classes from './Home.module.css';
 import { useEffect } from 'react';
 import { useQuery } from '../../hooks/use-query/use-query';
-import { WeatherResponse } from '../../types';
+import { OpenWeather, WeatherResponse } from '../../types';
 
 const Home = () => {
-  const { data: localWeather, reload } = useQuery<WeatherResponse | null>(
+  const { data: localWeather, reload } = useQuery<OpenWeather | null>(
     null,
     null
   );
