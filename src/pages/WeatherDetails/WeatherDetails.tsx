@@ -7,53 +7,37 @@ import { WeatherResponse } from '../../types';
 import { IoCloudyNight, IoSunny } from 'react-icons/io5';
 
 const WeatherDetails = () => {
-  const [note, setNote] = useState('');
-  const [notes, setNotes] = useState<string>('');
   const { state } = useLocation();
   const { location, current } = state as WeatherResponse;
+  const [storedNotes, setStoredNotes] = useState(() => {
+    const cachedData = localStorage.getItem(location.name);
+    if (cachedData) {
+      return JSON.parse(cachedData);
+    } else {
+      return '';
+    }
+  });
+  const [note, setNote] = useState('');
 
   useEffect(() => {
     const cachedData = localStorage.getItem(location.name);
     if (cachedData) {
-      // If data is already in the cache, return it
-      setNotes(JSON.parse(cachedData) as string);
-      setNote(JSON.parse(cachedData) as string);
-    }
-    return () => {
-      // if (notes.length > 0) {
-      //   // Cache the data in localStorage
-      //   localStorage.setItem(location.name, JSON.stringify(notes));
-      // }
-      if (notes) {
-        // Cache the data in localStorage
-        localStorage.setItem(location.name, JSON.stringify(notes));
-      }
-    };
-  }, [notes, location]);
+      setNote(JSON.parse(cachedData));
+    } 
+  }, [location.name]);
 
-  const handleSave = useCallback((note: string) => {
+  const handleSave = useCallback((weather: WeatherResponse, note: string) => {
     if (note) {
-      // setNotes((prevState) => ({ ...prevState }));
-      setNotes(note);
-      setNote('');
+      localStorage.setItem(weather.location.name, JSON.stringify(note));
+      setStoredNotes(note);
     }
   }, []);
 
-   const handleEdit = useCallback((weather: WeatherResponse, note: string) => {
-     if (note) {
-       // setNotes((prevState) => ({ ...prevState }));
-       setNotes(note);
-       setNote('');
-     }
-   }, []);
-
-    const handleDelete = useCallback((weather: WeatherResponse, note: string) => {
-      if (note) {
-        // setNotes((prevState) => ({ ...prevState }));
-        setNotes(note);
-        setNote('');
-      }
-    }, []);
+  const handleDelete = useCallback((weather: WeatherResponse, note: string) => {
+    localStorage.removeItem(weather.location.name);
+    setStoredNotes('');
+    setNote('');
+  }, []);
 
   return (
     <div className={classes['weather-details']}>
@@ -112,16 +96,25 @@ const WeatherDetails = () => {
         <section className={classes.notes}>
           <TextArea value={note} onChange={(e) => setNote(e.target.value)} />
           <div className={classes.actions}>
-            {notes ? (
+            {storedNotes ? (
               <>
-                <Button label="Edit" onClick={handleEdit.bind(null, state, note)} />
-                <Button variant='white' label="Delete" onClick={handleDelete.bind(null, state,  note)} />
+                <Button
+                  label="Edit"
+                  onClick={handleSave.bind(null, state, note)}
+                />
+                <Button
+                  variant="white"
+                  label="Delete"
+                  onClick={handleDelete.bind(null, state, note)}
+                />
               </>
             ) : (
-              <Button label="Save" onClick={handleSave.bind(null, note)} />
+              <Button
+                label="Save"
+                onClick={handleSave.bind(null, state, note)}
+              />
             )}
           </div>
-
         </section>
       </Container>
     </div>

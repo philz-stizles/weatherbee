@@ -22,7 +22,7 @@ export const useQuery = <T>(endpoint: string | null, initialValue: T) => {
           `${weatherBaseUrl}?access_key=${weatherAccessKey}${
             endpoint ? endpoint : ''
           }`,
-          { mode: 'no-cors' }
+          // { mode: 'no-cors' }
         );
         if (!response.ok) {
           throw new Error('Could not fetch data');
