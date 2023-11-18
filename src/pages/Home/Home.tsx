@@ -15,21 +15,21 @@ const Home = () => {
   const { data: geoPosition } = useGeoLocation({});
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (geoPosition) {
-      reload(
-        `&query=${geoPosition.coords?.latitude},${geoPosition.coords?.longitude}`
-      );
-    }
-  }, [geoPosition, reload]);
+  // useEffect(() => {
+  //   if (geoPosition) {
+  //     reload(
+  //       `&query=${geoPosition.coords?.latitude},${geoPosition.coords?.longitude}`
+  //     );
+  //   }
+  // }, [geoPosition, reload]);
 
-  useEffect(() => {
-    if (localWeather) {
-      navigate(`/weather/${localWeather.location.name}`, {
-        state: localWeather,
-      });
-    }
-  }, [localWeather, navigate]);
+  // useEffect(() => {
+  //   if (localWeather) {
+  //     navigate(`/weather/${localWeather.location.name}`, {
+  //       state: localWeather,
+  //     });
+  //   }
+  // }, [localWeather, navigate]);
 
   return (
     <div className={classes.wrapper}>

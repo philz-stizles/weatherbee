@@ -8,7 +8,7 @@ type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
 
 const Button = ({ label, children, ...props }: Props) => {
   return (
-    <button className={classes.Button} {...props}>
+    <button className={classes.button} {...props}>
       {label ?? children}
     </button>
   );

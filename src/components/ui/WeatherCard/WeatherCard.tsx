@@ -41,7 +41,7 @@ const WeatherCard = ({ city, onRemove }: Props) => {
   const handleNavigation = useCallback(
     (weather?: WeatherResponse) => {
       weather &&
-        navigate(`/weather/${weather.request?.query}`, {
+        navigate(`/weather/${weather.location?.name}`, {
           state: weather,
         });
     },

@@ -7,9 +7,9 @@ type Props = InputHTMLAttributes<HTMLTextAreaElement> & {
 
 const TextArea = ({ label, ...props }: Props) => {
   return (
-    <div>
+    <div className={classes.textarea}>
       {label && <label>{label}</label>}
-      <textarea className={classes.textarea} {...props} />
+      <textarea {...props} />
     </div>
   );
 };

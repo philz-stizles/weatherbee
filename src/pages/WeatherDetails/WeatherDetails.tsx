@@ -1,8 +1,9 @@
 import { useLocation } from 'react-router-dom';
-import { TextArea } from '../../components/ui';
+import { Button, TextArea } from '../../components/ui';
 import { Notes } from '../../components/weather-details';
 import { Container } from '../../components/shared';
 import { useEffect, useState } from 'react';
+import classes from './WeatherDetails.module.css'
 
 const WeatherDetails = () => {
   const [notes, setNotes] = useState([]);
@@ -18,9 +19,9 @@ const WeatherDetails = () => {
     <div>
       <Container>
         <section></section>
-        <section>
+        <section className={classes.notes}>
           <TextArea />
-          <Notes />
+          <Button label='Save' />
         </section>
       </Container>
     </div>
