@@ -19,7 +19,7 @@ type Props = {
 };
 
 const WeatherCard = ({ city, onRemove }: Props) => {
-  const { data, error } = useQuery<OpenWeather | null>(`?q=${city}`, null);
+  const { data, error } = useQuery<OpenWeather | null>(`?q=${city}&units=metric`, null);
   const navigate = useNavigate();
   const { add, remove, favorites } = useFavorites();
 

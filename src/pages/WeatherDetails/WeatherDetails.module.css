@@ -47,12 +47,22 @@
 }
 
 .left {
+  position: relative;
   background-color: #fff;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 2rem;
+  padding-top: 4.8rem;
+}
+
+.left img {
+  position: absolute;
+  top: 1.2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  /* z-index: -1; */
 }
 
 .temperature {
@@ -60,6 +70,10 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+}
+
+.name {
+  font-weight: 400;
 }
 
 .timestamp {
@@ -71,7 +85,7 @@
 
 .divider {
   width: 50%;
-  height: 0.2rem;
+  height: 0.24rem;
   background-color: #f1f3f5;
   border-radius: 20px;
 }
@@ -82,7 +96,7 @@
   font-weight: 400;
 }
 
-.temperature small {
+.temperature span {
 }
 
 .right {

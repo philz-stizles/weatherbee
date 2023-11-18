@@ -3,14 +3,15 @@ import { Button, TextArea } from '../../components/ui';
 import { Container } from '../../components/shared';
 import { useCallback, useEffect, useState } from 'react';
 import classes from './WeatherDetails.module.css';
-import { WeatherResponse } from '../../types';
+import { OpenWeather } from '../../types';
 import { IoCloudyNight, IoSunny } from 'react-icons/io5';
+import moment from 'moment';
 
 const WeatherDetails = () => {
   const { state } = useLocation();
-  const { location, current } = state as WeatherResponse;
+  const { main, name, wind, weather, dt, sys } = state as OpenWeather;
   const [storedNotes, setStoredNotes] = useState(() => {
-    const cachedData = localStorage.getItem(location.name);
+    const cachedData = localStorage.getItem(name);
     if (cachedData) {
       return JSON.parse(cachedData);
     } else {
@@ -20,21 +21,21 @@ const WeatherDetails = () => {
   const [note, setNote] = useState('');
 
   useEffect(() => {
-    const cachedData = localStorage.getItem(location.name);
+    const cachedData = localStorage.getItem(name);
     if (cachedData) {
       setNote(JSON.parse(cachedData));
-    } 
-  }, [location.name]);
+    }
+  }, [name]);
 
-  const handleSave = useCallback((weather: WeatherResponse, note: string) => {
+  const handleSave = useCallback((weather: OpenWeather, note: string) => {
     if (note) {
-      localStorage.setItem(weather.location.name, JSON.stringify(note));
+      localStorage.setItem(weather.name, JSON.stringify(note));
       setStoredNotes(note);
     }
   }, []);
 
-  const handleDelete = useCallback((weather: WeatherResponse, note: string) => {
-    localStorage.removeItem(weather.location.name);
+  const handleDelete = useCallback((weather: OpenWeather) => {
+    localStorage.removeItem(weather.name);
     setStoredNotes('');
     setNote('');
   }, []);
@@ -44,51 +45,53 @@ const WeatherDetails = () => {
       <Container className={classes.container}>
         <section className={classes.content}>
           <div className={classes.left}>
-            {current.is_day ? (
-              <IoSunny size={48} />
-            ) : (
-              <IoCloudyNight size={48} />
-            )}
+            <img
+              src={`https://openweathermap.org/img/wn/${weather[0].icon}@2x.png`}
+              alt="weather icon"
+            />
             <div className={classes.temperature}>
-              <h2>{current.temperature}°C</h2>
-              <small>{current.weather_descriptions[0]}</small>
+              <h2>{main.temp}°C</h2>
+              <span>{weather[0].description}</span>
             </div>
             <div className={classes.divider}></div>
             <div className={classes.timestamp}>
-              <p>{location.localtime}</p>
-              <p>{current.is_day === 'yes' ? 'Day' : 'Night'}</p>
+              <small>{moment.unix(dt).format('Do-MMM YYYY')}</small>
+              <p>{moment.unix(dt).format('dddd h:mm A')}</p>
+              <small>{name === 'yes' ? 'Day' : 'Night'}</small>
             </div>
-            <h2>{location.name}</h2>
+            <h2 className={classes.name}>
+              {name}, {sys.country}
+            </h2>
           </div>
           <div className={classes.right}>
             <h2>Today</h2>
             <div className={classes.grid}>
               <div className={classes['info-card']}>
                 <h4>Wind</h4>
-                <p className={classes.value}>{current.wind_speed}km/h</p>
-                <small>{current.wind_dir}</small>
+                <p className={classes.value}>{wind.speed} km/h</p>
+                <small>{wind.gust}</small>
               </div>
               <div className={classes['info-card']}>
                 <h4>Humidity</h4>
-                <p className={classes.value}>{current.humidity}%</p>
+                <p className={classes.value}>{main.humidity}%</p>
               </div>
               <div className={classes['info-card']}>
                 <h4>Real feel</h4>
-                <p className={classes.value}>{current.feelslike}°C</p>
+                <p className={classes.value}>{main.feels_like}°C</p>
               </div>
               <div className={classes['info-card']}>
-                <h4>UV Index</h4>
-                <p className={classes.value}>{current.uv_index}</p>
+                <h4>Wind Gust</h4>
+                <p className={classes.value}>{wind.gust}</p>
                 <small>Moderate</small>
               </div>
 
               <div className={classes['info-card']}>
                 <h3>Pressure</h3>
-                <p className={classes.value}>{current.pressure} mb</p>
+                <p className={classes.value}>{main.pressure} mb</p>
               </div>
               <div className={classes['info-card']}>
                 <h3>Cloud Cover</h3>
-                <p className={classes.value}>{current.cloudcover}</p>
+                <p className={classes.value}>{main.temp_max}</p>
               </div>
             </div>
           </div>
@@ -105,7 +108,7 @@ const WeatherDetails = () => {
                 <Button
                   variant="white"
                   label="Delete"
-                  onClick={handleDelete.bind(null, state, note)}
+                  onClick={handleDelete.bind(null, state)}
                 />
               </>
             ) : (
