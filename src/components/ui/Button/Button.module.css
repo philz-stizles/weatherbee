@@ -1,8 +1,27 @@
 .button {
-  background-color: black;
   color: white;
-  border: 1px solid #e5e7eb;
+  border: 1px solid transparent;
   padding: 1.4rem 3.2rem 1.4rem 2.4rem;
   border-radius: 20px;
   font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+}
+
+.outlined {
+  /* background-color: #fff; */
+  border: 1px solid #343a40;
+  color: #343a40;
+}
+
+.white {
+  background-color: #fff;
+  color: #343a40;
+  border-color: #fff;
+}
+
+.primary {
+  background-color: #343a40;
+  color: #fff;
+  border-color: #343a40;
 }

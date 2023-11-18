@@ -33,6 +33,7 @@ export type Current = {
   feelslike: number;
   uv_index: number;
   visibility: number;
+  is_day: string;
 };
 
 export type WeatherResponse = {
@@ -40,3 +41,16 @@ export type WeatherResponse = {
   location: Location;
   current: Current;
 };
+
+export type Size = 'xs' | 'sm' | 'md' | 'lg';
+
+export type Variant =
+  | 'white'
+  | 'black'
+  | 'success'
+  | 'danger'
+  | 'primary'
+  | 'secondary'
+  | 'tertiary'
+  | 'flat'
+  | 'outlined';

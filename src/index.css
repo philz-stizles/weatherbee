@@ -29,7 +29,8 @@ body {
   font-family: 'Nunito', sans-serif;
   font-size: 1.4rem;
   line-height: 1.6;
-  background-color: #f1f3f5;
+  background-color: #d1cfcf; 
+   /* #f1f3f5; */
 }
 
 main {

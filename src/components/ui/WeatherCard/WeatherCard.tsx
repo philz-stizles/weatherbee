@@ -23,10 +23,12 @@ const WeatherCard = ({ city, onRemove }: Props) => {
     null
   );
   const navigate = useNavigate();
-  const { add, favorites } = useFavorites();
+  const { add, remove, favorites } = useFavorites();
 
   const isFavorite = useMemo(() => {
-    return favorites.some(weather => weather.location.name === data?.location.name)
+    return favorites.some(
+      (weather) => weather.location.name === data?.location.name
+    );
   }, [data?.location.name, favorites]);
 
   const handleRemove = useCallback(
@@ -54,7 +56,13 @@ const WeatherCard = ({ city, onRemove }: Props) => {
     },
     [add]
   );
-  
+
+  const handleRemoveFromFavorite = useCallback(
+    (weather: WeatherResponse) => {
+      remove(weather);
+    },
+    [remove]
+  );
 
   if (error || !data) {
     return null;
@@ -73,10 +81,15 @@ const WeatherCard = ({ city, onRemove }: Props) => {
 
       <IconButton
         className={classes.favorite}
-        icon={isFavorite ? IoHeart : IoHeartOutline }
+        icon={isFavorite ? IoHeart : IoHeartOutline}
         onClick={(e) => {
           e.stopPropagation();
-          handleAddToFavorite(data);
+          if (isFavorite) {
+            handleRemoveFromFavorite(data);
+          } else {
+            handleAddToFavorite(data);
+          }
+          
         }}
       />
 
@@ -85,7 +98,6 @@ const WeatherCard = ({ city, onRemove }: Props) => {
           <h4>{`${data?.location?.name?.substring(0, 18)}`}</h4>
           <IoSunny className={classes.icon} size={32} />
           <p className={classes.temperature}>{data?.current?.temperature}°C</p>
-          {/* <p>Weather: {data?.current?.weather_descriptions[0]}</p> */}
         </div>
       )}
     </div>
