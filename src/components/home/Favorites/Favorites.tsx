@@ -8,12 +8,23 @@ const Favorites = () => {
   const { favorites, remove } = useFavorites();
 
   return (
-    <section className={classes.favorites}>
+    <section>
       <Container>
-        <div className={classes.row}>
-          {favorites.map((item, i) => (
-            <FavoriteCard data={item} key={i} onRemove={remove} />
-          ))}
+        <div className={`${classes.grid} no-scrollbar`}>
+          {favorites
+            .sort((a, b) => {
+              switch (a.name > b.name) {
+                case true:
+                  return 1;
+                case false:
+                  return -1;
+                default:
+                  return 0;
+              }
+            })
+            .map((item, i) => (
+              <FavoriteCard data={item} key={i} onRemove={remove} />
+            ))}
         </div>
       </Container>
     </section>

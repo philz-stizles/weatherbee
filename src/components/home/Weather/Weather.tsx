@@ -34,13 +34,24 @@ const Weather = () => {
             onChange={(e) => setSearch(e.target.value)}
           />
           <div className={classes.grid}>
-            {cities.map((city) => (
-              <WeatherCard
-                key={city}
-                city={city}
-                onRemove={handleRemove.bind(null, city)}
-              />
-            ))}
+            {cities
+              .sort((a, b) => {
+                switch (a > b) {
+                  case true:
+                    return 1;
+                  case false:
+                    return -1;
+                  default:
+                    return 0;
+                }
+              })
+              .map((city) => (
+                <WeatherCard
+                  key={city}
+                  city={city}
+                  onRemove={handleRemove.bind(null, city)}
+                />
+              ))}
           </div>
         </div>
       </Container>

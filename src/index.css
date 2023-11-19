@@ -29,8 +29,8 @@ body {
   font-family: 'Nunito', sans-serif;
   font-size: 1.4rem;
   line-height: 1.6;
-  background-color: #d1cfcf; 
-   /* #f1f3f5; */
+  background-color: #d1cfcf;
+  /* #f1f3f5; */
 }
 
 main {
@@ -61,4 +61,15 @@ input {
 ul,
 ol {
   list-style: none;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }

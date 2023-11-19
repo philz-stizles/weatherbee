@@ -1,18 +1,20 @@
 import { ButtonHTMLAttributes } from 'react';
 import classes from './IconButton.module.css';
 import { IconType } from 'react-icons';
+import { Size } from '../../../types';
 
 type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
   icon: IconType;
+  size?: Size
 };
 
-const IconButton = ({ className, icon: Icon, ...props }: Props) => {
+const IconButton = ({ className, size = 'md',  icon: Icon, ...props }: Props) => {
   return (
     <button
       className={`${classes['icon-button']}${className ? ` ${className}` : ''}`}
       {...props}
     >
-      <Icon size={18} />
+      <Icon size={size === 'xs' ? 12 : size === 'md' ? 18: 24} />
     </button>
   );
 };

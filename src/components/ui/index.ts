@@ -6,3 +6,4 @@ export { default as TextArea } from './TextArea/TextArea';
 export { default as Logo } from './Logo/Logo';
 export { default as FavoriteCard } from './FavoriteCard/FavoriteCard';
 export { default as WeatherCard } from './WeatherCard/WeatherCard';
+export { default as InfoCard } from './InfoCard/InfoCard';

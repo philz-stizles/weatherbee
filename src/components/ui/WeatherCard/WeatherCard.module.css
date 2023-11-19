@@ -26,6 +26,7 @@
 }
 
 .close-button {
+  color: #868e96;
   position: absolute;
   top: 1rem;
   right: 1rem;

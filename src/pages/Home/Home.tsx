@@ -5,7 +5,7 @@ import Weather from '../../components/home/Weather/Weather';
 import classes from './Home.module.css';
 import { useEffect } from 'react';
 import { useQuery } from '../../hooks/use-query/use-query';
-import { OpenWeather, WeatherResponse } from '../../types';
+import { OpenWeather } from '../../types';
 
 const Home = () => {
   const { data: localWeather, reload } = useQuery<OpenWeather | null>(
@@ -15,21 +15,21 @@ const Home = () => {
   const { data: geoPosition } = useGeoLocation({});
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   if (geoPosition) {
-  //     reload(
-  //       `&query=${geoPosition.coords?.latitude},${geoPosition.coords?.longitude}`
-  //     );
-  //   }
-  // }, [geoPosition, reload]);
+  useEffect(() => {
+    if (geoPosition) {
+      reload(
+        `?lat=${geoPosition.coords?.latitude}&lon=${geoPosition.coords?.longitude}&units=metric`
+      );
+    }
+  }, [geoPosition, reload]);
 
-  // useEffect(() => {
-  //   if (localWeather) {
-  //     navigate(`/weather/${localWeather.location.name}`, {
-  //       state: localWeather,
-  //     });
-  //   }
-  // }, [localWeather, navigate]);
+  useEffect(() => {
+    if (localWeather) {
+      // navigate(`/weather/${localWeather.name}`, {
+      //   state: localWeather,
+      // });
+    }
+  }, [localWeather, navigate]);
 
   return (
     <div className={classes.wrapper}>

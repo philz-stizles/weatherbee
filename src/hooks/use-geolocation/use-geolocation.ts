@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-export const useGeoLocation = (options: PositionOptions) => {
+export const useGeoLocation = (options?: PositionOptions) => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<GeolocationPositionError | null>(null);
   const [data, setData] = useState<Partial<GeolocationPosition>>({});

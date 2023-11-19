@@ -8,106 +8,10 @@
   gap: 1.4rem;
 }
 
-.content {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  border-radius: 20px;
-  overflow: hidden;
-}
-
-.info-card {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  padding: 2rem;
-  background-color: #f8f9fa;
-  color: #343a40;
-  border-radius: 20px;
-}
-
-.info-card h4 {
-  font-weight: 400;
-}
-
 .notes {
   display: flex;
   flex-direction: column;
   gap: 1.4rem;
-}
-
-.value {
-  font-size: 2rem;
-  font-weight: 400;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  grid-gap: 2.4rem;
-}
-
-.left {
-  position: relative;
-  background-color: #fff;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 2rem;
-  padding-top: 4.8rem;
-}
-
-.left img {
-  position: absolute;
-  top: 1.2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  /* z-index: -1; */
-}
-
-.temperature {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-.name {
-  font-weight: 400;
-}
-
-.timestamp {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-.divider {
-  width: 50%;
-  height: 0.24rem;
-  background-color: #f1f3f5;
-  border-radius: 20px;
-}
-
-.temperature h2 {
-  color: #343a40;
-  font-size: 4.8rem;
-  font-weight: 400;
-}
-
-.temperature span {
-}
-
-.right {
-  background-color: #efefef;
-  grid-column: span 2 / span 2;
-  padding: 4.2rem 2.4rem;
-}
-
-.right h2 {
-  margin-bottom: 2rem;
-  font-weight: 300;
 }
 
 .actions {

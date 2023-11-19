@@ -38,6 +38,7 @@ const FavoriteCard = ({ data, onRemove }: Props) => {
       onClick={handleNavigation.bind(null, data)}
     >
       <IconButton
+        size="xs"
         className={classes['close-button']}
         icon={IoCloseOutline}
         onClick={(e) => handleRemove(e, data)}
@@ -45,7 +46,7 @@ const FavoriteCard = ({ data, onRemove }: Props) => {
 
       {data && (
         <div className={classes.content}>
-          <h4>{`${data?.name?.substring(0, 18)}`}</h4>
+          <h4>{`${data?.name}`}</h4>
           <p>{data.main.temp}°C</p>
         </div>
       )}
