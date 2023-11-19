@@ -94,7 +94,7 @@ const WeatherCard = ({ city, onRemove }: Props) => {
       {data && (
         <div className={classes.content}>
           <h4>{`${data.name?.substring(0, 18)}`}</h4>
-          {data?.base ? (
+          {data?.weather[0].icon.includes('d') ? (
             <IoSunny className={classes.icon} size={32} />
           ) : (
             <IoCloudyNight className={classes.icon} size={32} />
