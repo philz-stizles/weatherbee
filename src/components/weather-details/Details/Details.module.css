@@ -1,6 +1,6 @@
 .details {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(1, minmax(0, 1fr));
   border-radius: 20px;
   overflow: hidden;
 }
@@ -15,11 +15,11 @@
   position: relative;
   background-color: #fff;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 2rem;
-  padding-top: 4.8rem;
+  padding: 4.8rem 2.4rem 2.4rem 2.4rem;
 }
 
 .left img {
@@ -44,7 +44,7 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: center;
+  align-items: start;
 }
 
 .temperature h2 {
@@ -63,7 +63,7 @@
 }
 
 .timestamp {
-  display: flex;
+  display: none;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
@@ -78,32 +78,41 @@
 
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
-  .grid {
-    
+  .details {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+
+  .left {
+    flex-direction: row;
+    align-items: center;
+    padding-bottom: 2.4rem;
+  }
+
+  .temperature {
+    align-items: start;
+  }
+
+  .timestamp {
+    display: none;
   }
 }
 
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
-  .grid {
-     
+  .details {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
-}
 
-/* Large devices (desktops, 992px and up) */
-@media (min-width: 992px) {
-  .grid {
-     
+  .temperature {
+    align-items: center;
   }
-}
 
-/* X-Large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {
-  .grid {
-     
+  .timestamp {
+    display: flex;
   }
-}
 
-/* XX-Large devices (larger desktops, 1400px and up) */
-@media (min-width: 1400px) {
+  .left {
+    flex-direction: column;
+    padding-bottom: 0rem;
+  }
 }

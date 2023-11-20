@@ -25,7 +25,7 @@ const Weather = () => {
   };
 
   return (
-    <section>
+    <section data-testid="weather">
       <Container>
         <div className={classes.content}>
           <Search

@@ -8,7 +8,7 @@ const Favorites = () => {
   const { favorites, remove } = useFavorites();
 
   return (
-    <section>
+    <section data-testid="favorites">
       <Container>
         <div className={`${classes.grid} no-scrollbar`}>
           {favorites

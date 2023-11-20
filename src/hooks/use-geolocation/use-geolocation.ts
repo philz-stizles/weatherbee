@@ -17,20 +17,26 @@ export const useGeoLocation = (options?: PositionOptions) => {
       setError(positionError);
     };
 
-    navigator.geolocation.getCurrentPosition(
-      handleSuccess,
-      handleError,
-      options
-    );
+    let id: number;
 
-    const id = navigator.geolocation.watchPosition(
-      handleSuccess,
-      handleError,
-      options
-    );
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        handleSuccess,
+        handleError,
+        options
+      );
+
+      id = navigator.geolocation.watchPosition(
+        handleSuccess,
+        handleError,
+        options
+      );
+    }
 
     return () => {
-      navigator.geolocation.clearWatch(id);
+      if ('geolocation' in navigator) {
+        navigator.geolocation.clearWatch(id);
+      }
     };
   }, []);
 

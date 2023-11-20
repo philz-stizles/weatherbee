@@ -1,33 +1,33 @@
 import { render, screen } from '@testing-library/react';
-import TextArea from './TextArea';
+import Search from './Search';
 import userEvent from '@testing-library/user-event';
 
 const mockedOnChange = jest.fn();
 
-describe('TextArea', () => {
+describe('Search', () => {
   test('render with initial empty value', () => {
     // Arrange.
-    render(<TextArea />);
+    render(<Search />);
 
     // Assert.
-    const textAreaElement = screen.getByRole('textbox');
-    expect(textAreaElement).toHaveValue('');
+    const searchElement = screen.getByRole('searchbox');
+    expect(searchElement).toHaveValue('');
   });
 
   test('render with a placeholder text', () => {
     // Arrange.
-    const placeholder = 'TextArea places...';
-    render(<TextArea placeholder={placeholder} />);
+    const placeholder = 'Search places...';
+    render(<Search placeholder={placeholder} />);
 
     // Assert.
-    const textArea = screen.getByRole('textbox');
-    expect(textArea).toHaveAttribute('placeholder', placeholder);
+    const search = screen.getByRole('searchbox');
+    expect(search).toHaveAttribute('placeholder', placeholder);
   });
 
   test('render with a label', () => {
     // Arrange.
-    const label = 'TextArea places';
-    render(<TextArea label={label} />);
+    const label = 'Search places';
+    render(<Search label={label} />);
 
     // Assert.
     const labelElement = screen.getByLabelText(label);
@@ -36,13 +36,13 @@ describe('TextArea', () => {
 
   test('renders with the provided id as label "for" and input "id" attributes', () => {
     // Arrange.
-    const mockedLabel = 'TextArea places';
-    const mockedId = 'textArea';
-    render(<TextArea id={mockedId} label={mockedLabel} />);
+    const mockedLabel = 'Search places';
+    const mockedId = 'search';
+    render(<Search id={mockedId} label={mockedLabel} />);
 
     // Assert.
     const labelElement = screen.getByLabelText(mockedLabel);
-    const inputElement = screen.getByRole('textbox');
+    const inputElement = screen.getByRole('searchbox');
 
     expect(labelElement).toBeInTheDocument();
     expect(inputElement).toHaveAttribute('id', mockedId);
@@ -51,11 +51,11 @@ describe('TextArea', () => {
   test('callback function is called on user interactions', async () => {
     // Arrange.
     const mockedInput = 'london';
-    render(<TextArea onChange={mockedOnChange} />);
-    const textAreaElement = screen.getByRole('textbox');
+    render(<Search onChange={mockedOnChange} />);
+    const searchElement = screen.getByRole('searchbox');
 
     // Action.
-    userEvent.type(textAreaElement, mockedInput);
+    userEvent.type(searchElement, mockedInput);
 
     // Assert.
     expect(mockedOnChange).toHaveBeenCalled();
@@ -64,13 +64,13 @@ describe('TextArea', () => {
   test('value is updated on user interactions', async () => {
     // Arrange.
     const mockedInput = 'london';
-    render(<TextArea />);
-    const textAreaElement = screen.getByRole('textbox');
+    render(<Search />);
+    const searchElement = screen.getByRole('searchbox');
 
     // Action.
-    userEvent.type(textAreaElement, mockedInput);
+    userEvent.type(searchElement, mockedInput);
 
     // Assert.
-    expect(textAreaElement).toHaveValue(mockedInput);
+    expect(searchElement).toHaveValue(mockedInput);
   });
 });

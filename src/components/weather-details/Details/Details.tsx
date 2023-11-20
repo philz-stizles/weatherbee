@@ -9,7 +9,7 @@ type Props = {
 
 const Details = ({ data: { weather, main, wind, sys, name, dt } }: Props) => {
   return (
-    <section className={classes.details}>
+    <section data-testid="details" className={classes.details}>
       <div className={classes.left}>
         <img
           src={`https://openweathermap.org/img/wn/${weather[0].icon}@2x.png`}

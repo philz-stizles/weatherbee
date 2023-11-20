@@ -7,13 +7,20 @@ type Props = InputHTMLAttributes<HTMLInputElement> & {
 };
 
 const Search = forwardRef<HTMLInputElement, Props>(
-  ({ label, ...props }: Props, ref) => {
+  ({ label, id, ...props }: Props, ref) => {
+
+    const inputId =
+      id ??
+      (label && typeof label === 'string'
+        ? label.replace(' ', '-').toLowerCase()
+        : undefined); 
+
     return (
       <div className={classes.search}>
-        {label && <label>{label}</label>}
+        {label && <label htmlFor={inputId}>{label}</label>}
         <div className={classes.input}>
           <IoSearch />
-          <input {...props} ref={ref} type="search" placeholder="Search" />
+          <input id={inputId} {...props} ref={ref} type="search" />
         </div>
       </div>
     );

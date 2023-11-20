@@ -44,12 +44,10 @@ const FavoriteCard = ({ data, onRemove }: Props) => {
         onClick={(e) => handleRemove(e, data)}
       />
 
-      {data && (
-        <div className={classes.content}>
-          <h4>{`${data?.name}`}</h4>
-          <p>{data.main.temp}°C</p>
-        </div>
-      )}
+      <div className={classes.content}>
+        <h4>{`${data?.name}`}</h4>
+        <p>{data.main.temp}°C</p>
+      </div>
     </div>
   );
 };

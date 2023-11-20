@@ -32,7 +32,7 @@ const Home = () => {
   }, [localWeather, navigate]);
 
   return (
-    <div className={classes.wrapper}>
+    <div data-testid="home" className={classes.wrapper}>
       <Favorites />
       <Weather />
     </div>
